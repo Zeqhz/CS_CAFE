@@ -95,7 +95,7 @@ Pour plus de précisions, il vous est possible de contacter le Responsable du tr
                 
                 <button type='submit' id='submit' name='action' value='RefuserRGPD' >
                     Refuser
-                </button>
+                </button> 
       </form>
         
         ";

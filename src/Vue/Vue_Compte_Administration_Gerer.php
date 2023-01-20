@@ -51,7 +51,7 @@ class Vue_Compte_Administration_Gerer extends Vue_Composant
                         Modifier RGPD 
                     </button>
                 </form>
-            </td>
+            </td> 
         </tr>
     </table>
     $this->msg
