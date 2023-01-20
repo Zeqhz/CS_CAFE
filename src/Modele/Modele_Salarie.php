@@ -169,6 +169,6 @@ WHERE idSalarie = :paramidUtilisateur');
         $requetePreparee->bindParam('idSalarie', $idSalarie);
         $dateAct = date("Y-m-d H:i:s");
         $requetePreparee->bindParam('dateAct', $dateAct);
-        $reponse = $requetePreparee->execute();
+        $reponse = $requetePreparee->execute() ;
     }
 }
