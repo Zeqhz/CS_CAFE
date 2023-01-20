@@ -54,6 +54,10 @@ switch ($action) {
         $Vue->setEntete(new Vue_Structure_Entete());
         $Vue->addToCorps(new Vue_Connexion_Formulaire_client());
         break;
+    case "modifierRGPD":
+        $Vue->setEntete(new Vue_Structure_Entete());
+        $Vue->addToCorps(new \App\Vue\Vue_RGPD());
+        break;
     default :
         //Cas par défaut: affichage du menu des actions.
         $Vue->setEntete(new Vue_Structure_Entete());

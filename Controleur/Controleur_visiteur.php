@@ -15,17 +15,27 @@ $Vue->setEntete(new Vue_Structure_Entete());
 
 switch ($action) {
     case "reinitmdpconfirm":
-
+        function passgen3($nbChar)
+        {
+            $chaine = "ABCDEFGHIJKLMONOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789&()=^*ù!:;,~";
+            srand(random_int(0, 999999999999999999));
+            $pass = '';
+            for ($i = 0; $i < $nbChar; $i++) {
+                $pass .= $chaine[rand() % strlen($chaine)];
+            }
+            return $pass;
+        }
+        echo passgen3(10);
         //On regarde si le mail appartient à une entreprise
         $entreprise = Modele_Entreprise::Entreprise_Select_ParMail($_REQUEST["email"]);
 
         if ($entreprise != null) {
             // le mail appartient à une entreprise
             // on va faire le mail pour cette entreprise !
-            $nvMdp = "secret";
+            $nvMdp = passgen3(12);
             Modele_Entreprise::Entreprise_Modifier_motDePasse($idEntreprise, $nvMdp);
 
-            $mail = new PHPMailer;
+            $mail = new PHPMailer\PHP;
             $mail->isSMTP();
             $mail->Host = '127.0.0.1';
             $mail->CharSet = "UTF-8";
@@ -58,10 +68,10 @@ switch ($action) {
             $salarie = Modele_Salarie::Salarie_Select_byMail($_REQUEST["email"]);
 
             if ($salarie != null) {
-                $nvMdp = "secret";
+                $nvMdp = passgen3(12);
                 Modele_Salarie::Salarie_Modifier_motDePasse($salarie["idSalarie"], $nvMdp);
 
-                $mail = new PHPMailer;
+                $mail = new PHPMailer\PHPMailer();
                 $mail->isSMTP();
                 $mail->Host = '127.0.0.1';
                 $mail->CharSet = "UTF-8";

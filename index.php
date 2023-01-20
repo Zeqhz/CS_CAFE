@@ -1,4 +1,5 @@
 <?php
+namespace App\Utilitaire;
 session_start();
 include_once "vendor/autoload.php";
 
@@ -27,6 +28,7 @@ if(!verifierCSRF($CSRF))
     $Vue->addToCorps(new Vue_Connexion_Formulaire_client());
     $Vue->addToCorps(new Vue_AfficherMessage("Il ne faut pas actualiser !"));
     $Vue->afficher();
+    Singleton_Logger::getInstance()->info('Jeton CSRF Réutilisé!', );
     die();
 }
 

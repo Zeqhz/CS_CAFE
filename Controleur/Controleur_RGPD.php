@@ -16,6 +16,7 @@ switch ($action) {
         break;
     case "RefuserRGPD":
         //Il faut le code pour log out
+        \App\Modele\Modele_Salarie::modifierRGDP($_SESSION["idSalarie"]);
         session_destroy();
         unset($_SESSION);
         $Vue->addToCorps(new Vue_Connexion_Formulaire_client());

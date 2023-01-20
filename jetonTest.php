@@ -5,7 +5,7 @@ $utilisateur = \App\Modele\Modele_Salarie::Salarie_Select_byMail("userZoomBox@us
 $octetsAleatoires = openssl_random_pseudo_bytes (256) ;
 $valeurJeton = sodium_bin2base64($octetsAleatoires, SODIUM_BASE64_VARIANT_ORIGINAL);
 
-$idJetonCree = \App\Modele\Modele_Jeton::Jeton_Creation($valeurJeton,$utilisateur["id"],1);
+$idJetonCree = \App\Modele\Modele_Jeton::Jeton_Creation($valeurJeton,$utilisateur["idSalarie"],1);
 
 $jetonRecherche = \App\Modele\Modele_Jeton::Jeton_Rechercher_ParValeur($valeurJeton);
 
@@ -13,7 +13,7 @@ if($idJetonCree == $jetonRecherche["id"])
 {
     //On a retrouvé le jeton par rapport à sa valeur :)
     //on check si l'utilisateur est le même :)
-    if($jetonRecherche["idUtilisateur"] == $utilisateur["id"])
+    if($jetonRecherche["idUtilisateur"] == $utilisateur["idSalarie"])
     {
         //L'utilisateur est bon :)
         if($jetonRecherche["codeAction"] == 1)
@@ -21,7 +21,7 @@ if($idJetonCree == $jetonRecherche["id"])
             //Le code action ets bon :)
             \App\Modele\Modele_Jeton::Jeton_Delete_parID($idJetonCree);
             $jetonRechercheApresDel = \App\Modele\Modele_Jeton::Jeton_Rechercher_ParValeur($valeurJeton);
-            if($jetonRechercheApresDel == false)
+            if(!$jetonRechercheApresDel)
             {
                 // Pas trouvé : c'est le résultat attendu
                 echo "Test ok";
